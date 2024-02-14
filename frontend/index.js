@@ -72,7 +72,7 @@ function moduleProject2() {
     let downKey = evt.key === keys.down
     let rightKey = evt.key === keys.right
     let leftKey = evt.key === keys.left
-    //let spaceKey = evt.key === keys.space
+    let spaceKey = evt.key === keys.space
     let targeted = document.querySelector('.targeted')
 
     // 👉 TASK 3 - Use the arrow keys to highlight a new square 👈
@@ -104,12 +104,29 @@ function moduleProject2() {
     }
 
     // 👉 TASK 4 - Use the space bar to exterminate a mosquito 👈
-    /*if (spaceKey) {
-      console.log('you up')
-    }
-    */
-
+    let mosquito = targeted.firstChild
+    //let alive = mosquito.dataset.status === 'alive'
+    
+    if (spaceKey) {
+      if (mosquito && mosquito.dataset.status === 'alive') {
+        mosquito.dataset.status = 'dead'
+        mosquito.parentElement.style.backgroundColor = 'red'
+      }
+  
     // 👉 TASK 5 - End the game 👈
+    let mosquitoCount = document.querySelectorAll('[data-status=alive]')
+      if (mosquitoCount.length === 0) {
+        let time = getTimeElapsed()
+        document.querySelector('p.info').textContent = `Extermination complete in ${time / 1000} seconds!`
+      
+        let restartBtn = document.createElement('button')
+        restartBtn.textContent = 'Restart'
+        restartBtn.addEventListener('click', () => {
+            location.reload()
+        })
+        document.querySelector('h2').insertAdjacentElement('beforeend', restartBtn)
+      } 
+    }
   })
   // 👆 WORK WORK ABOVE THIS LINE 👆
 }
