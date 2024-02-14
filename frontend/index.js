@@ -68,9 +68,46 @@ function moduleProject2() {
   })
 
   document.addEventListener('keydown', evt => {
+    let upKey = evt.key === keys.up
+    let downKey = evt.key === keys.down
+    let rightKey = evt.key === keys.right
+    let leftKey = evt.key === keys.left
+    //let spaceKey = evt.key === keys.space
+    let targeted = document.querySelector('.targeted')
+
     // 👉 TASK 3 - Use the arrow keys to highlight a new square 👈
+    if (upKey) {
+      if (targeted.parentElement.previousElementSibling){
+        let i = Array.from(targeted.parentElement.children).indexOf(targeted)
+        targeted.classList.remove('targeted')
+        targeted.parentElement.previousElementSibling.children[i].classList.add('targeted')
+      }
+    } 
+    else if (downKey) {
+      if (targeted.parentElement.nextElementSibling){
+        let i = Array.from(targeted.parentElement.children).indexOf(targeted)
+        targeted.classList.remove('targeted')
+        targeted.parentElement.nextElementSibling.children[i].classList.add('targeted')
+      }
+    } 
+    else if (leftKey) {
+      if (targeted.previousElementSibling) {
+       targeted.classList.remove('targeted')
+       targeted.previousElementSibling.classList.add('targeted')
+      } 
+    } 
+    else if (rightKey) {
+      if (targeted.nextElementSibling) {
+       targeted.classList.remove('targeted')
+       targeted.nextElementSibling.classList.add('targeted')
+      } 
+    }
 
     // 👉 TASK 4 - Use the space bar to exterminate a mosquito 👈
+    /*if (spaceKey) {
+      console.log('you up')
+    }
+    */
 
     // 👉 TASK 5 - End the game 👈
   })
